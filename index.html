@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Antonio Ruiz Benito">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+
+    <h2>Formulario</h2>
+
+    <div class="form">
+
+        <form action="" method="get" id="loginForm">
+            <ul>
+                <li><label for="user">User</label><input type="text" id="user" name="name_user" required></li>
+                <li><label for="pass">Pass</label><input type="password" id="pass" name="pass_user" required></li>
+                <li id="btn"><input type="submit" value="Login"></li>
+            </ul>
+        </form>
+
+    </div>
+
+    <div class="movingCaja">
+
+    </div>
+
+    <script>
+        // Usuario y contraseña correcto para hacer login
+        const userCorrecto = "admin";
+        const passCorrecto = "12345678";
+
+
+        const form = document.getElementById("loginForm");
+
+        form.addEventListener('submit', function(event) {
+            // Evito el envio del formulario
+            event.preventDefault();
+
+            // Obtengo el usuario y contraseña introducidos en el formulario
+            let user = document.getElementById("user").value;
+            let pass = document.getElementById("pass").value;
+
+            if (user === userCorrecto && pass === passCorrecto) {
+                console.log("Login correcto");
+
+
+                    // Creo una caja utilizando un elemento div
+                    const cajaCorrecto = document.createElement("div");
+
+                    // Establezco un id a la caja
+                    cajaCorrecto.setAttribute("id", "cajaCorrecto"); 
+
+                    // Agrago contenido al div
+                    cajaCorrecto.textContent = "Bienvenido!!!";
+
+                    // Agrego el div al documento
+                    document.body.appendChild(cajaCorrecto);
+
+                    // Creo una variable booleana para poder ir intercambiando cosas dentro de la caja
+                    let control = true;
+
+                    setInterval(function () {
+                        if (control) {
+                            cajaCorrecto.style.backgroundColor = "pink";
+                            cajaCorrecto.style.color = "white";
+                            cajaCorrecto.style.textAlign = "center";
+                            cajaCorrecto.style.transform = "translate(530%, 150%)";
+                            control = false;
+                        } else {
+                            cajaCorrecto.style.backgroundColor = "rgb(88, 154, 156)";
+                            cajaCorrecto.style.color = "grey";
+                            control = true;
+                        }
+
+                    }, 200)
+
+                    // En 10 segundos la caja desaparecera
+                    setTimeout(function () {
+                        cajaCorrecto.remove();
+                    }, 10000)
+
+
+
+            } else {
+                console.log("Login incorrecto");
+
+                // Creo una caja utilizando un elemento div
+                const cajaIncorrecto = document.createElement("div");
+
+                // Establezco un id a la caja
+                cajaIncorrecto.setAttribute("id", "cajaIncorrecto"); 
+
+                // Agrago contenido al div
+                cajaIncorrecto.textContent = "Has introducido el usuario o el password mal!!!";
+
+                // Agrego el div al documento
+                document.body.appendChild(cajaIncorrecto);
+
+                // Creo una variable booleana para poder ir intercambiando cosas dentro de la caja
+                let control = true;
+
+                let idInterval = setInterval(function () {
+                        if (control) {
+                            cajaIncorrecto.style.backgroundColor = "#D00909";
+                            cajaIncorrecto.style.color = "#E9D6DC";
+                            cajaIncorrecto.style.letterSpacing = "1px";
+                            cajaIncorrecto.style.width = "300px";
+                            cajaIncorrecto.style.height = "40px";
+                            cajaIncorrecto.style.transform = "translate(700%, 150%)";
+                            document.body.style.backgroundColor = "white";
+                            document.body.style.color = "black";
+                            control = false;
+                            
+                        } else {
+                            cajaIncorrecto.style.backgroundColor = "#C5172F";
+                            cajaIncorrecto.style.color = "#2F2425";
+                            cajaIncorrecto.style.width = "310px";
+                            cajaIncorrecto.style.height = "60px";
+                            cajaIncorrecto.style.letterSpacing = "5px";
+                            document.body.style.backgroundColor = "black";
+                            document.body.style.color = "white";
+                            control = true;
+                        }
+
+                        }, 800)
+
+                        // En 5 segundos la caja desaparecera
+                        setTimeout(function () {
+                            cajaIncorrecto.remove();
+                            clearInterval(idInterval);
+                        }, 8000)
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+</html>
